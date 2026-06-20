@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h3>Logs Explorer (Splunk-like)</h3>
+
+<!-- 🔎 SEARCH / FILTER BAR -->
+<form method="GET" class="row g-2 mb-3">
+
+    <div class="col">
+        <input type="text" name="ip" class="form-control"
+               placeholder="IP Address"
+               value="{{ filters.ip if filters.ip else '' }}">
+    </div>
+
+    <div class="col">
+        <input type="text" name="username" class="form-control"
+               placeholder="Username"
+               value="{{ filters.username if filters.username else '' }}">
+    </div>
+
+    <div class="col">
+        <input type="text" name="event_type" class="form-control"
+               placeholder="Event Type"
+               value="{{ filters.event_type if filters.event_type else '' }}">
+    </div>
+
+    <div class="col">
+        <select name="severity" class="form-control">
+            <option value="" {% if not filters.get('severity') %}selected{% endif %}>All Severities</option>
+            <option value="High" {% if filters.get('severity') == 'High' %}selected{% endif %}>High</option>
+            <option value="Medium" {% if filters.get('severity') == 'Medium' %}selected{% endif %}>Medium</option>
+            <option value="Low" {% if filters.get('severity') == 'Low' %}selected{% endif %}>Low</option>
+        </select>
+    </div>
+
+    <div class="col">
+        <button class="btn btn-info w-100">Search</button>
+    </div>
+
+    <div class="col">
+        <a href="/logs" class="btn btn-outline-light w-100">Reset</a>
+    </div>
+
+</form>
+
+<!-- ⚡ QUICK FILTERS -->
+<div class="mb-3">
+    <a href="/logs?severity=High" class="btn btn-sm btn-danger">High</a>
+    <a href="/logs?severity=Medium" class="btn btn-sm btn-warning">Medium</a>
+    <a href="/logs?severity=Low" class="btn btn-sm btn-success">Low</a>
+    <a href="/logs" class="btn btn-sm btn-secondary">All</a>
+</div>
+
+<!-- 📜 LOG TABLE -->
+<table class="table table-dark table-striped table-hover">
+
+    <thead>
+        <tr>
+            <th>Timestamp</th>
+            <th>Source IP</th>
+            <th>Dest IP</th>
+            <th>User</th>
+            <th>Event Type</th>
+            <th>Severity</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        {% for log in logs %}
+        <tr>
+            <td>{{ log.timestamp }}</td>
+            <td>{{ log.src_ip }}</td>
+            <td>{{ log.dst_ip }}</td>
+            <td>{{ log.username if log.username else '-' }}</td>
+            <td>{{ log.event_type }}</td>
+            <td class="severity-{{ log.severity }}">{{ log.severity }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+
+</table>
+
+{% endblock %}

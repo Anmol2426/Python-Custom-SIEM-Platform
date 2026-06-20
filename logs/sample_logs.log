@@ -1,0 +1,79 @@
+Jan 12 10:15:01 sshd[1001]: Accepted password for user1 from 192.168.1.10 port 22
+Jan 12 10:15:20 firewall SRC=192.168.1.10 DST=192.168.1.1 action=ALLOWED
+Jan 12 10:15:45 systemd: Started session for user1
+Jan 12 10:16:02 sshd[1100]: Failed password for root from 192.168.1.20 port 22
+Jan 12 10:16:10 sshd[1101]: Failed password for root from 192.168.1.20 port 22
+Jan 12 10:16:25 sshd[1102]: Failed password for root from 192.168.1.20 port 22
+Jan 12 10:16:40 sshd[1103]: Failed password for root from 192.168.1.20 port 22
+Jan 12 10:16:55 sshd[1104]: Failed password for root from 192.168.1.20 port 22
+Jan 12 10:17:10 sshd[1105]: Accepted password for root from 192.168.1.20 port 22
+Jan 12 10:17:25 systemd: Started session for root
+Jan 12 10:17:40 kernel: disk error detected
+Jan 12 10:17:50 kernel: I/O error on device sda1
+Jan 12 10:18:00 firewall SRC=10.0.0.5 DST=192.168.1.5 action=DENIED
+Jan 12 10:18:10 firewall SRC=10.0.0.5 DST=192.168.1.5 action=DENIED
+Jan 12 10:18:20 firewall SRC=10.0.0.5 DST=192.168.1.5 action=DENIED
+Jan 12 10:18:30 firewall SRC=10.0.0.5 DST=192.168.1.5 action=DENIED
+Jan 12 10:18:45 firewall SRC=192.168.1.15 DST=192.168.1.1 action=ALLOWED
+Jan 12 10:19:00 sshd[1200]: Accepted password for admin from 192.168.1.15 port 22
+Jan 12 10:19:20 systemd: Started session for admin
+Jan 12 10:19:40 firewall SRC=172.16.0.2 DST=192.168.1.5 action=ALLOWED
+Jan 12 10:20:00 sshd[1300]: Failed password for admin from 192.168.1.25 port 22
+Jan 12 10:20:20 sshd[1301]: Accepted password for admin from 192.168.1.25 port 22
+Jan 12 10:20:45 systemd: Started session for admin
+Jan 12 10:21:05 kernel: CPU temperature normal
+Jan 12 10:21:20 firewall SRC=192.168.1.50 DST=192.168.1.1 action=ALLOWED
+Jan 12 10:21:40 sshd[1400]: Accepted password for user2 from 192.168.1.50 port 22
+Jan 12 10:22:00 systemd: Started session for user2
+Jan 12 10:22:20 kernel: memory usage stable
+Jan 12 10:22:40 firewall SRC=10.0.0.8 DST=192.168.1.5 action=DENIED
+Jan 12 10:23:00 firewall SRC=10.0.0.8 DST=192.168.1.5 action=ALLOWED
+Jan 12 10:23:20 sshd[1500]: Failed password for user3 from 192.168.1.60 port 22
+Jan 12 10:23:40 sshd[1501]: Accepted password for user3 from 192.168.1.60 port 22
+Jan 12 10:24:00 systemd: Started session for user3
+Jan 12 10:24:20 kernel: network interface eth0 up
+Jan 12 10:24:40 firewall SRC=172.16.0.3 DST=192.168.1.1 action=ALLOWED
+Jan 12 10:25:00 sshd[1600]: Accepted password for user4 from 192.168.1.70 port 22
+Jan 12 10:25:20 systemd: Started session for user4
+Jan 12 10:25:40 kernel: system running normally
+Jan 12 10:26:00 sshd[1700]: Failed password for admin from 203.0.113.10 port 22
+Jan 12 10:26:15 sshd[1701]: Failed password for admin from 203.0.113.10 port 22
+Jan 12 10:26:30 sshd[1702]: Failed password for admin from 203.0.113.10 port 22
+Jan 12 10:26:45 sshd[1703]: Failed password for admin from 203.0.113.10 port 22
+Jan 12 10:27:00 sshd[1704]: Accepted password for admin from 203.0.113.10 port 22
+Jan 12 10:27:15 systemd: Started session for admin
+Jan 12 10:27:30 firewall SRC=198.51.100.5 DST=192.168.1.5 action=DENIED
+Jan 12 10:27:40 firewall SRC=198.51.100.5 DST=192.168.1.5 action=DENIED
+Jan 12 10:27:50 firewall SRC=198.51.100.5 DST=192.168.1.5 action=DENIED
+Jan 12 10:28:00 firewall SRC=198.51.100.5 DST=192.168.1.5 action=DENIED
+Jan 12 10:28:15 kernel: disk error detected
+Jan 12 10:28:30 kernel: filesystem error occurred
+Jan 12 10:28:45 sshd[1800]: Failed password for root from 203.0.113.20 port 22
+Jan 12 10:29:00 sshd[1801]: Failed password for root from 203.0.113.20 port 22
+Jan 12 10:29:15 sshd[1802]: Failed password for root from 203.0.113.20 port 22
+Jan 12 10:29:30 sshd[1803]: Failed password for root from 203.0.113.20 port 22
+Jan 12 10:29:45 sshd[1804]: Failed password for root from 203.0.113.20 port 22
+Jan 12 10:30:00 sshd[1805]: Accepted password for root from 203.0.113.20 port 22
+Jan 12 10:30:15 systemd: Started session for root
+Jan 12 10:30:30 firewall SRC=198.51.100.25 DST=192.168.1.5 action=DENIED
+Jan 12 10:30:40 firewall SRC=198.51.100.25 DST=192.168.1.5 action=DENIED
+Jan 12 10:30:50 firewall SRC=198.51.100.25 DST=192.168.1.5 action=DENIED
+Jan 12 10:31:00 firewall SRC=198.51.100.25 DST=192.168.1.5 action=DENIED
+Jan 12 10:31:15 sshd[1900]: Accepted password for user5 from 192.168.1.80 port 22
+Jan 12 10:31:30 systemd: Started session for user5
+Jan 12 10:31:45 kernel: memory error detected
+Jan 12 10:32:00 kernel: cache error occurred
+Jan 12 10:32:15 sshd[2000]: Failed password for user6 from 203.0.113.30 port 22
+Jan 12 10:32:30 sshd[2001]: Failed password for user6 from 203.0.113.30 port 22
+Jan 12 10:32:45 sshd[2002]: Failed password for user6 from 203.0.113.30 port 22
+Jan 12 10:33:00 sshd[2003]: Failed password for user6 from 203.0.113.30 port 22
+Jan 12 10:33:15 sshd[2004]: Accepted password for user6 from 203.0.113.30 port 22
+Jan 12 10:33:30 systemd: Started session for user6
+Jan 12 10:33:45 firewall SRC=203.0.113.40 DST=192.168.1.5 action=DENIED
+Jan 12 10:33:55 firewall SRC=203.0.113.40 DST=192.168.1.5 action=DENIED
+Jan 12 10:34:05 firewall SRC=203.0.113.40 DST=192.168.1.5 action=DENIED
+Jan 12 10:34:15 firewall SRC=203.0.113.40 DST=192.168.1.5 action=DENIED
+Jan 12 10:34:30 kernel: disk error detected
+Jan 12 10:34:45 kernel: I/O error on device sdb1
+Jan 12 10:35:00 sshd[2100]: Accepted password for user7 from 192.168.1.90 port 22
+Jan 12 10:35:15 systemd: Started session for user7

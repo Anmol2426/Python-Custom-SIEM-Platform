@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h3>Incidents</h3>
+
+<table class="table table-dark table-striped table-hover">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Source IP</th>
+            <th>Severity</th>
+            <th>Status</th>
+            <th>Created</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+
+    <tbody>
+    {% for i in incidents %}
+        <tr>
+            <td>{{ i.id }}</td>
+            <td>{{ i.incident_name }}</td>
+            <td>{{ i.src_ip }}</td>
+            <td class="severity-{{ i.severity }}">{{ i.severity }}</td>
+            <td>{{ i.status }}</td>
+            <td>{{ i.created_at }}</td>
+            <td><a class="btn btn-sm btn-info" href="/timeline/{{ i.id }}">View Timeline</a></td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}

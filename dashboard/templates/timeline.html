@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h3>Incident Timeline</h3>
+
+<div class="alert alert-secondary">
+    <b>{{ incident.incident_name }}</b> | {{ incident.src_ip }} | {{ incident.severity }}
+</div>
+
+<table class="table table-dark table-striped table-hover">
+    <thead>
+        <tr>
+            <th>Timestamp</th>
+            <th>Event Type</th>
+            <th>Username</th>
+            <th>Source IP</th>
+        </tr>
+    </thead>
+
+    <tbody>
+    {% for t in timeline %}
+        <tr>
+            <td>{{ t.timestamp }}</td>
+            <td>{{ t.event_type }}</td>
+            <td>{{ t.username if t.username else '-' }}</td>
+            <td>{{ t.src_ip }}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}

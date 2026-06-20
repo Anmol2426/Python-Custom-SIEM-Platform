@@ -1,0 +1,8 @@
+{
+  "sources": [
+    {
+      "type": "file",
+      "path": "logs/sample_logs.log"
+    }
+  ]
+}

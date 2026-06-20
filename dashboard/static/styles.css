@@ -1,0 +1,39 @@
+body {
+    font-family: Arial;
+}
+
+.card-box {
+    background: #1f1f1f;
+    padding: 20px;
+    margin: 10px;
+    border-radius: 10px;
+    text-align: center;
+    font-size: 18px;
+}
+
+.severity-High {
+    color: red;
+    font-weight: bold;
+}
+
+.severity-Medium {
+    color: orange;
+    font-weight: bold;
+}
+
+.severity-Low {
+    color: green;
+    font-weight: bold;
+}
+
+/* 🔥 Dashboard search placeholder fix */
+input::placeholder {
+    color: #aaaaaa6a !important;
+    opacity: 1; /* ensures visibility in dark theme */
+}
+
+/* 🔹 NEW: severity colors (SAFE) */
+
+.severity-High { color: red; }
+.severity-Medium { color: orange; }
+.severity-Low { color: green; }

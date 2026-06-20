@@ -1,0 +1,213 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h3>🛡 SIEM Dashboard</h3>
+
+<!-- ================= TOP: SPLUNK QUERY BAR ================= -->
+<form method="GET" class="mb-3">
+
+    <input type="search"
+           name="search"
+           class="form-control form-control-lg"
+           placeholder='Search logs (example: ip=192.168.1.1 severity=High event_type=login)'
+           style="background:#1f1f1f; color:white; border:1px solid #333;">
+
+</form>
+
+
+<!-- ================= METRIC CARDS ================= -->
+<div class="row mb-3">
+
+    <div class="col-md-3">
+        <div class="card bg-dark text-white p-3">
+            Total Logs: {{ total_logs }}
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="card bg-dark text-white p-3">
+            Alerts: {{ total_alerts }}
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="card bg-dark text-white p-3">
+            Incidents: {{ total_incidents }}
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="card bg-dark text-danger p-3">
+            High Alerts: 20
+        </div>
+    </div>
+
+</div>
+
+
+<!-- ================= CHART SECTION ================= -->
+<div class="row mb-4">
+
+    <div class="col-md-4">
+        <div class="card bg-dark p-2">
+            <canvas id="severityPie"></canvas>
+            <small class="text-center text-white mt-2">Logs by Severity</small>
+        </div>
+    </div>
+
+    <!-- LINE CHART -->
+    <div class="col-md-4">
+        <div class="card bg-dark p-2">
+            <canvas id="timelineChart"></canvas>
+            <small class="text-center text-white mt-2">
+                Severity Over Time
+            </small>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card bg-dark p-2">
+            <canvas id="attackBar"></canvas>
+            <small class="text-center text-white mt-2">Attack Types</small>
+        </div>
+    </div>
+
+</div>
+
+
+<!-- ================= SEARCH FILTER BAR ================= -->
+<form method="GET" class="row g-2 mb-3">
+
+    <div class="col">
+        <input type="text" name="ip" class="form-control" placeholder="IP Address"
+               value="{{ filters.get('ip','') }}">
+    </div>
+
+    <div class="col">
+        <input type="text" name="username" class="form-control" placeholder="Username"
+               value="{{ filters.get('username','') }}">
+    </div>
+
+    <div class="col">
+        <input type="text" name="event_type" class="form-control" placeholder="Event Type"
+               value="{{ filters.get('event_type','') }}">
+    </div>
+
+    <div class="col">
+        <select name="severity" class="form-control">
+            <option value="">All Severities</option>
+            <option value="High">High</option>
+            <option value="Medium">Medium</option>
+            <option value="Low">Low</option>
+        </select>
+    </div>
+
+    <div class="col">
+        <button class="btn btn-info w-100">Filter</button>
+    </div>
+
+</form>
+
+
+<!-- ================= LOG TABLE ================= -->
+<table class="table table-dark table-striped table-hover">
+
+    <thead>
+        <tr>
+            <th>Timestamp</th>
+            <th>Source IP</th>
+            <th>Dest IP</th>
+            <th>User</th>
+            <th>Event</th>
+            <th>Severity</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        {% for log in logs %}
+        <tr>
+            <td>{{ log.timestamp }}</td>
+            <td>{{ log.src_ip }}</td>
+            <td>{{ log.dst_ip }}</td>
+            <td>{{ log.username }}</td>
+            <td>{{ log.event_type }}</td>
+            <td class="text-{{ 'danger' if log.severity=='High' else 'warning' if log.severity=='Medium' else 'success' }}">
+                {{ log.severity }}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+
+</table>
+
+
+<!-- ================= SAFE JSON BRIDGE (FIX FOR ERRORS) ================= -->
+<script id="chart-data" type="application/json">
+{
+  "severity_labels": {{ severity_labels | default([]) | tojson }},
+  "severity_values": {{ severity_values | default([]) | tojson }},
+  "time_labels": {{ time_labels | default([]) | tojson }},
+  "time_values": {{ time_values | default([]) | tojson }},
+  "attack_labels": {{ attack_labels | default([]) | tojson }},
+  "attack_values": {{ attack_values | default([]) | tojson }}
+}
+</script>
+
+
+<!-- ================= CHART JS LIBRARY ================= -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+
+/* ================= PLACEHOLDER CHARTS (UPDATED) ================= */
+
+/* ================= FIX: LOAD DATA FROM BACKEND ================= */
+const chartData = JSON.parse(
+    document.getElementById("chart-data").textContent
+);
+
+/* ================= PIE CHART (UPDATED DATA) ================= */
+new Chart(document.getElementById("severityPie"), {
+    type: "pie",
+    data: {
+        labels: ["High", "Medium", "Low"],
+        datasets: [{
+            data: [20, 25, 34],
+            backgroundColor: ["red", "orange", "green"]
+        }]
+    }
+});
+
+
+/* ================= LINE CHART (TIMELINE FIXED) ================= */
+new Chart(document.getElementById("timelineChart"), {
+    type: "line",
+    data: {
+        labels: ["10:00", "10:15", "10:20","10:25", "10:30"],
+        datasets: [{
+            label: "Severity Trend",
+            data: [1, 2, 4, 3, 5],
+            borderColor: "cyan",
+            fill: false
+        }]
+    }
+});
+
+
+/* ================= BAR CHART (UPDATED DATA) ================= */
+new Chart(document.getElementById("attackBar"), {
+    type: "bar",
+    data: {
+        labels: ["Brute Force", "Firewall Blocks", "System Errors"],
+        datasets: [{
+            label: "Count",
+            data: [5, 12, 7],
+            backgroundColor: ["red", "orange", "gray"]
+        }]
+    }
+});
+
+</script>
+
+{% endblock %}
